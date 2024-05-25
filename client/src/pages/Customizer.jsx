@@ -36,9 +36,45 @@ const Customizer = () => {
       case "filepicker":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
       case "aipicker":
-        return <AIPicker />;
+        return (
+          <AIPicker
+            prompt={prompt}
+            setPrompt={setPrompt}
+            generatingImg={generatingImg}
+            handleSubmit={handlePromptSubmit}
+          />
+        );
       default:
         return null;
+    }
+  };
+
+  const handlePromptSubmit = async (type) => {
+    if (!prompt) alert("Please enter a prompt!");
+
+    try {
+      setGeneratingImg(true);
+      const response = await fetch("http://localhost:8080/api/v1/aiImgGen", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
+
+      if (response.status == 500) {
+        throw new Error("Error in generating image");
+      }
+
+      const data = await response.json();
+      handleDecals(type, `data:image/png;base64,${data.genImgBase64}`);
+    } catch (error) {
+      alert(error);
+    } finally {
+      setGeneratingImg(false);
+      setActiveEditorTab("");
     }
   };
 

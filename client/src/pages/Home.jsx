@@ -36,9 +36,9 @@ const Home = () => {
               {...headContentAnimation}
             >
               <p className="max-w-md font-normal text-gray-600 text-base">
-                Create your own unique & exclusive t-shirt witth our brand new
+                Create your own unique & exclusive t-shirt with our brand new
                 customization tool. <strong>Unleash your imagination</strong> &
-                define your style
+                define your style!
               </p>
 
               <CustomButton
