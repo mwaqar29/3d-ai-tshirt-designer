@@ -37,18 +37,15 @@ router.route("/").post(async (req, res) => {
     const result = await replicate.run(`${MODEL_ID}:${MODEL_VERSION_ID}`, {
       input,
     });
-    console.log(result);
     if (result?.length) {
       const base64String = await imageUrlToBase64(result[0]);
       res.status(200).json({
         genImgBase64: base64String,
       });
     } else {
-      console.log(result);
       throw new Error("Error in generating image");
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 });
