@@ -16,6 +16,7 @@
     "clarifai-nodejs-grpc": "^10.3.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "replicate": "^0.30.0"
   }
 }
